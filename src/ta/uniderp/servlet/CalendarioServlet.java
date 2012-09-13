@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ta.uniderp.service.CalendarioService;
-
 @WebServlet("/calendarioServlet")
 public class CalendarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,7 +20,6 @@ public class CalendarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String acao = (String) request.getAttribute("btnAction");
-		CalendarioService cal = new CalendarioService();
 		
 		
 		
