@@ -50,7 +50,7 @@ public class Conexao {
          ps = conn.prepareStatement(sql);
          ps.setDate(1, (Date) compromisso.getData());
          ps.executeUpdate();
-         ps.close();
+         ps.close(); 
          conn.close();
     }
     
