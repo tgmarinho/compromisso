@@ -8,7 +8,6 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/annotations-api.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/catalina.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/catalina-ant.jar"/>
@@ -25,5 +24,6 @@
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/tomcat-dbcp.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/tomcat-jdbc.jar"/>
 	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/apache-tomcat-7.0.27/lib/tomcat-util.jar"/>
+	<classpathentry exported="true" kind="lib" path="/home/tgmarinho/Documentos/dev/postgresql-8.4-702.jdbc4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

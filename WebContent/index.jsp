@@ -1,3 +1,6 @@
+
+<%@page import="java.io.Console"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="ta.uniderp.db.Conexao"%>
 <%@page import="ta.uniderp.pojo.Compromisso"%>
 <%@page import="java.util.*"%>
@@ -14,24 +17,26 @@
         <h1>Listagem de alunos</h1>
         <table>
             <tr>
-                <td width="200" bgcolor="silver">RA</td>
-                <td width="600" bgcolor="silver">Nome</td>
-                <td width="600" bgcolor="silver">N1</td>
-                <td width="600" bgcolor="silver">N2</td>
+                <td width="200" bgcolor="silver">Data</td>
+                <td width="600" bgcolor="silver">Descrição</td>
+                <td width="600" bgcolor="silver">Dia da Semana</td>
+                <td width="600" bgcolor="silver">Quantidade de Dias</td>
                 
             </tr>
             <%
             Conexao conn = new Conexao();
         	List<Compromisso> compromissos = conn.findAll();
-        	
+        	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
            
             for(Compromisso compromisso : compromissos) {
+       		   String dataFormatada = sdf.format(compromisso.getData());
+       		   
                %>
                <tr>
-                <td><%=compromisso.getRa()%></td>
-                <td><%=compromisso.getNome()%></td>
-                <td><%=compromisso.getN1()%></td>
-                <td><%=compromisso.getN2()%></td>
+                <td><%=dataFormatada%></td>
+                <td><%=compromisso.getDescricao()%></td>
+                <td><%=compromisso.getDiaSemana()%></td>
+                <td><%=compromisso.getQuantidadeDias()%></td>
                 
             </tr>
             <%
