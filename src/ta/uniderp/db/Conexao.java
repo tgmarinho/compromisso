@@ -108,6 +108,7 @@ public class Conexao {
 	}
 
 	public int quantidadaDias(Date data) throws ParseException {
+		// @FilipeNevola - créditos: http://javafree.uol.com.br/topic-875440-Calculando-o-numero-de-dias-entre-duas-datas.html
 		GregorianCalendar ini = new GregorianCalendar();
 		GregorianCalendar fim = new GregorianCalendar();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -145,10 +146,10 @@ public class Conexao {
 			dia = "Quinta-feira";
 			break;
 		case 5:
-			dia = "Sex";
+			dia = "Sexta-feira";
 			break;
 		case 6:
-			dia = "Sab";
+			dia = "Sábado";
 			break;
 		}
 
