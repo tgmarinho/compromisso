@@ -14,13 +14,18 @@
 </head>
 <body>
        
-        <h1>Compromissos</h1>
+       <% 
+       	  Date dataHoje = new Date();
+          SimpleDateFormat sdformat = new SimpleDateFormat("dd/MM/yyyy");
+       %>
+       
+        <h1 align="center">Agenda de Compromissos - Hoje: <%=sdformat.format(dataHoje)%></h1>
         <table>
             <tr>
                 <td width="200" bgcolor="silver">Data</td>
                 <td width="600" bgcolor="silver">Descrição</td>
                 <td width="600" bgcolor="silver">Dia da Semana</td>
-                <td width="600" bgcolor="silver">Quantidade de Dias</td>
+                <td width="600" bgcolor="silver">Prazo</td>
                 <td width="600" bgcolor="silver">Alterar/Excluir</td>
                 
             </tr>

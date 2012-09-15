@@ -26,16 +26,11 @@ public class CalendarioServlet extends HttpServlet {
 		this.conn = new Conexao();
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-	}
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String acao = (String) request.getSession().getAttribute("acao");
 		
 		if(acao == "excluir") {
-			System.out.println("opa entrei aqui");
 			String data = (String) request.getParameter("data");
 			String descricao = (String) request.getParameter("descricao");
 			if(data != null || descricao != null) {
@@ -48,7 +43,6 @@ public class CalendarioServlet extends HttpServlet {
 			}
 			
 		} else if (acao == "alterar") {
-			System.out.println("opa entrei aqui");
 			String data = (String) request.getParameter("data");
 			String descricao = (String) request.getParameter("descricao");
 			if(data != null || descricao != null) {
@@ -62,7 +56,6 @@ public class CalendarioServlet extends HttpServlet {
 			}
 			
 		} else if(acao == "cadastrar") {
-			System.out.println("opa entrei aqui");
 			String data = (String) request.getParameter("data");
 			String descricao = (String) request.getParameter("descricao");
 			if(data != null || descricao != null) {
@@ -73,13 +66,12 @@ public class CalendarioServlet extends HttpServlet {
 				// Terminou de cadastrar redireciono o usuário para tela principal
 				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 				rd.forward(request, response);
-			} else {
-				System.err.println("data " + data 
-						+ "descricao "  + descricao);
-			}
+			} 
 			 
 		} else if(acao  == null) {
 			System.out.println("affffff acao não pode ser nula programador");
+			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);
 		}
 	}
 	

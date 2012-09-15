@@ -23,7 +23,7 @@
 		</table>
 	</form>
 
-	<p align="center"><a href="index.jsp">Inicio</a></p>
+	<p align="center"><a href="index.jsp">Início</a></p>
 
  <% request.getSession().setAttribute("acao", "cadastrar");  %>	
 

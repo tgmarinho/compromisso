@@ -1,7 +1,6 @@
 package ta.uniderp.db;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,7 +78,7 @@ public class Conexao {
 		return compromissos;
 	}
 
-	// Se eu não tiver mais nda pra fazer eu arrumo isso
+	// Se eu não tiver mais nda pra fazer eu implemento isso
 	public List<Compromisso> findByRa(String data) throws SQLException {
 		this.st = conn.createStatement();
 		// String data = converteDataForString(data);
@@ -109,7 +108,7 @@ public class Conexao {
 		Calendar c = Calendar.getInstance();
 		c.setTime(data);
 		int d = c.get(Calendar.DAY_OF_WEEK) -1;
-		String dia = "semDia";
+		String dia = "noDay";
 		System.out.println("VALOR DE D: " + d);
 		switch (d) {
 		case 0:
