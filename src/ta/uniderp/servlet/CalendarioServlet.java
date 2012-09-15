@@ -3,9 +3,10 @@ package ta.uniderp.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,14 +30,22 @@ public class CalendarioServlet extends HttpServlet {
 	
 	}
 	
-	
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		String acao = (String) request.getSession().getAttribute("acao");
 		
-		if(acao == "Excluir") {
+		if(acao == "excluir") {
+			System.out.println("opa entrei aqui");
+			String data = (String) request.getParameter("data");
+			String descricao = (String) request.getParameter("descricao");
+			if(data != null || descricao != null) {
+				Compromisso c = new Compromisso();
+				c.setData(formataData(data));
+				excluir(c);
+				// Terminou de excluir redireciono o usuário para tela principal
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
+			}
 			
 		} else if (acao == "alterar") {
 			System.out.println("opa entrei aqui");
@@ -44,8 +53,12 @@ public class CalendarioServlet extends HttpServlet {
 			String descricao = (String) request.getParameter("descricao");
 			if(data != null || descricao != null) {
 				Compromisso c = new Compromisso();
+				c.setData(formataData(data));
 				c.setDescricao(descricao);
 				alterar(c);
+				// Terminou de alterar redireciono o usuário para tela principal
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
 			}
 			
 		} else if(acao == "cadastrar") {
@@ -56,32 +69,36 @@ public class CalendarioServlet extends HttpServlet {
 				Compromisso c = new Compromisso();
 				c.setData(formataData(data));
 				c.setDescricao(descricao);
-				
 				cadastrar(c);
+				// Terminou de cadastrar redireciono o usuário para tela principal
+				RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+				rd.forward(request, response);
 			} else {
 				System.err.println("data " + data 
 						+ "descricao "  + descricao);
 			}
 			 
 		} else if(acao  == null) {
-			System.out.println("affffff acao é null");
+			System.out.println("affffff acao não pode ser nula programador");
 		}
-		
-		
-		
 	}
 	
-	
+	private void excluir(Compromisso c) {
+		try {
+			this.conn.delete(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void alterar(Compromisso c) {
 		try {
 			this.conn.update(c);
-//			String a;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	private void cadastrar(Compromisso c) {
@@ -94,21 +111,17 @@ public class CalendarioServlet extends HttpServlet {
 		}
 	}
 
+	// Formato a data para deixar padrão para o SGBD PostgreSql
 	private Date formataData(String data) {
-		try{
-		System.err.println("formataData() - 74");
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		@SuppressWarnings("deprecation")
-		Date dataFormatada = new Date(data);
-		sdf.format(dataFormatada);
-		System.out.println(dataFormatada);
-		return dataFormatada; 
-		}catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		
-		
+		String strDia = data.substring(0, 2);
+		String strMes = data.substring(3, 5);
+		String strAno = data.substring(6, 10);
+		int dia = Integer.parseInt(strDia);
+		int mes = Integer.parseInt(strMes) - 1;
+		int ano = Integer.parseInt(strAno);
+		Calendar c = Calendar.getInstance();
+		c.set(ano, mes, dia);
+		return c.getTime();
 	}
 
 }

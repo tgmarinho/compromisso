@@ -14,7 +14,7 @@
 </head>
 <body>
        
-        <h1>Listagem de alunos</h1>
+        <h1>Compromissos</h1>
         <table>
             <tr>
                 <td width="200" bgcolor="silver">Data</td>
@@ -46,6 +46,12 @@
             <%
             }
            %>
+            
+           <br> 
+           <p align="center"><a href="index.jsp">Início</a></p>
+           <p align="center"><a href="cadastrar.jsp">Cadastrar</a></p>
+            
+            
             
         </table>
     </body>
