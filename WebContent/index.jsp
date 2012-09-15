@@ -21,6 +21,7 @@
                 <td width="600" bgcolor="silver">Descrição</td>
                 <td width="600" bgcolor="silver">Dia da Semana</td>
                 <td width="600" bgcolor="silver">Quantidade de Dias</td>
+                <td width="600" bgcolor="silver">Alterar/Excluir</td>
                 
             </tr>
             <%
@@ -37,7 +38,10 @@
                 <td><%=compromisso.getDescricao()%></td>
                 <td><%=compromisso.getDiaSemana()%></td>
                 <td><%=compromisso.getQuantidadeDias()%></td>
-                
+                 <td width="600" bgcolor="silver">
+	                <a href="alterar.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="alterar" id="alt">Alterar/</a>
+	                <a href="excluir.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="excluir" id="exc">Excluir</a>
+	            </td>
             </tr>
             <%
             }

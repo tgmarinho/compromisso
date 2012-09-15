@@ -25,33 +25,46 @@ public class CalendarioServlet extends HttpServlet {
 		this.conn = new Conexao();
 	}
 	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+	
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
+		String acao = (String) request.getSession().getAttribute("acao");
 		
-		String acao = (String) request.getAttribute("btnAction");
-		
-		
-		// chamada bd
-		if(acao == "excluir") {
-			
-			//cal.removeCompromisso(data);
+		if(acao == "Excluir") {
 			
 		} else if (acao == "alterar") {
+			System.out.println("opa entrei aqui");
+			String data = (String) request.getParameter("data");
+			String descricao = (String) request.getParameter("descricao");
+			if(data != null || descricao != null) {
+				Compromisso c = new Compromisso();
+				c.setDescricao(descricao);
+				alterar(c);
+			}
 			
-//			cal.atualizaCompromisso(pk, data, descricao);
-			
-		} else if(acao == "Cadastrar") {
-			
-			String data = (String) request.getAttribute("data");
-			String descricao = (String) request.getAttribute("descricao");
-			Compromisso c = new Compromisso();
-			c.setData(formataData(data));
-			c.setDescricao(descricao);
-			
-			cadastrar(c);
-			
-			
+		} else if(acao == "cadastrar") {
+			System.out.println("opa entrei aqui");
+			String data = (String) request.getParameter("data");
+			String descricao = (String) request.getParameter("descricao");
+			if(data != null || descricao != null) {
+				Compromisso c = new Compromisso();
+				c.setData(formataData(data));
+				c.setDescricao(descricao);
+				
+				cadastrar(c);
+			} else {
+				System.err.println("data " + data 
+						+ "descricao "  + descricao);
+			}
+			 
+		} else if(acao  == null) {
+			System.out.println("affffff acao é null");
 		}
 		
 		
@@ -59,6 +72,18 @@ public class CalendarioServlet extends HttpServlet {
 	}
 	
 	
+	private void alterar(Compromisso c) {
+		try {
+			this.conn.update(c);
+//			String a;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	private void cadastrar(Compromisso c) {
 		try {
 			this.conn.insert(c);
@@ -70,11 +95,20 @@ public class CalendarioServlet extends HttpServlet {
 	}
 
 	private Date formataData(String data) {
+		try{
+		System.err.println("formataData() - 74");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		sdf.format(data);
 		@SuppressWarnings("deprecation")
 		Date dataFormatada = new Date(data);
-		return dataFormatada;
+		sdf.format(dataFormatada);
+		System.out.println(dataFormatada);
+		return dataFormatada; 
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
 	}
 
 }

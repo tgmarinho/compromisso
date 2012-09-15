@@ -14,6 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.apache.naming.java.javaURLContextFactory;
+
 import ta.uniderp.pojo.Compromisso;
 
 public class Conexao {
@@ -37,15 +39,22 @@ public class Conexao {
 	}
 
 	public void insert(Compromisso compromisso) throws SQLException, ParseException {
-		String sql = "INSERT INTO compromisso VALUES ( '?','?','?',? )";
+		System.out.println("insert - 40 conexao");
+		String sql = "INSERT INTO compromisso VALUES (?,?,?,?)";
 		PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
-		ps.setDate(0, (Date) compromisso.getData());
-		ps.setString(1, diaSemana((Date) compromisso.getData()));
-		ps.setString(2, compromisso.getDescricao());
-		ps.setInt(3, quantidadaDias((Date) compromisso.getData()));
-		ps.executeQuery();
-		ps.close();
-		conn.close();
+		
+		java.sql.Date dataSql = new java.sql.Date(compromisso.getData().getTime());
+		System.out.println("dataSql: = " + dataSql);
+		String diaSemana =  diaSemana(compromisso.getData());
+		int quantidadeDias = quantidadaDias(compromisso.getData());
+		String compro = compromisso.getDescricao();
+		System.out.println(sql);
+		ps.setDate(1, dataSql);
+		ps.setString(2, compro);
+		System.out.println(sql);
+		ps.setString(3, diaSemana);
+		ps.setInt(4, quantidadeDias);
+		ps.execute();
 	}
 
 	public void delete(Compromisso compromisso) throws SQLException {
@@ -55,8 +64,6 @@ public class Conexao {
 		ps = conn.prepareStatement(sql);
 		ps.setDate(1, (Date) compromisso.getData());
 		ps.executeUpdate();
-		ps.close();
-		conn.close();
 	}
 
 	public void update(Date pk, Compromisso compromisso) throws SQLException, ParseException {
@@ -65,15 +72,12 @@ public class Conexao {
 		// some_column=some_value
 		String sql = "UPDATE compromisso SET data=?, diaSemana=?, descricao=?, quantidadeDias=? WHERE data=?";
 		PreparedStatement ps = (PreparedStatement) conn.prepareStatement(sql);
-		ps.setDate(0, (Date) compromisso.getData());
-		ps.setString(1, diaSemana((Date) compromisso.getData()));
-		ps.setString(2, compromisso.getDescricao());
-		ps.setInt(3, quantidadaDias((Date) compromisso.getData()));
-		ps.setDate(4, (Date) pk);
+		ps.setDate(1, (Date) compromisso.getData());
+		ps.setString(2, diaSemana(compromisso.getData()));
+		ps.setString(3, compromisso.getDescricao());
+		ps.setInt(4, quantidadaDias(compromisso.getData()));
+		ps.setDate(5, (Date) pk);
 		ps.execute(sql);
-		ps.close();
-		conn.close();
-
 	}
 
 	public List<Compromisso> findAll() throws SQLException, ParseException {
@@ -107,7 +111,7 @@ public class Conexao {
 		return retorno;
 	}
 
-	public int quantidadaDias(Date data) throws ParseException {
+	public int quantidadaDias(java.util.Date data) throws ParseException {
 		// @FilipeNevola - créditos: http://javafree.uol.com.br/topic-875440-Calculando-o-numero-de-dias-entre-duas-datas.html
 		GregorianCalendar ini = new GregorianCalendar();
 		GregorianCalendar fim = new GregorianCalendar();
@@ -122,8 +126,8 @@ public class Conexao {
 	}
 
 	// Saber o Dia da Semana
-	public String diaSemana(Date data) {
-
+	public String diaSemana(java.util.Date data) {
+		
 		Calendar c = Calendar.getInstance();
 		c.setTime(data);
 		int d = c.get(Calendar.DAY_OF_WEEK);
