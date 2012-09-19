@@ -12,7 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Lista de Compromissos</title>
 </head>
-<body>
+<body bgcolor="#3366CC">
        
        <% 
        	  Date dataHoje = new Date();
@@ -20,13 +20,21 @@
        %>
        
         <h1 align="center">Agenda de Compromissos - Hoje: <%=sdformat.format(dataHoje)%></h1>
-        <table>
+        <center>
+        <table width="300" border="1" cellspacing="0" cellpadding="0"  bgcolor="#C9C9C9">
+  			<tr>
+   			 <td width="150" align="center"><a href="index.jsp">Início</a></td>
+   			 <td width="150" align="center"><a href="cadastrar.jsp">Cadastrar</a></td>
+  			</tr>
+            </table>
+            <br/>
+        <table width="950" border="1"  cellspacing="0" cellpadding="0"  >
             <tr>
-                <td width="200" bgcolor="silver">Data</td>
-                <td width="600" bgcolor="silver">Descrição</td>
-                <td width="600" bgcolor="silver">Dia da Semana</td>
-                <td width="600" bgcolor="silver">Prazo</td>
-                <td width="600" bgcolor="silver">Alterar/Excluir</td>
+                <td width="100" bgcolor="silver">Data</td>
+                <td width="300" bgcolor="silver">Descrição</td>
+                <td width="300" bgcolor="silver">Dia da Semana</td>
+                <td width="100" bgcolor="silver">Dias faltantes</td>
+                <td width="150" bgcolor="silver">Opções</td>
                 
             </tr>
             <%
@@ -43,7 +51,7 @@
                 <td><%=compromisso.getDescricao()%></td>
                 <td><%=compromisso.getDiaSemana()%></td>
                 <td><%=compromisso.getQuantidadeDias()%></td>
-                 <td width="600" bgcolor="silver">
+                 <td bgcolor="#C9C9C9">
 	                <a href="alterar.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="alterar" id="alt">Alterar/</a>
 	                <a href="excluir.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="excluir" id="exc">Excluir</a>
 	            </td>
@@ -52,13 +60,13 @@
             }
            %>
             
-           <br> 
-           <p align="center"><a href="index.jsp">Início</a></p>
-           <p align="center"><a href="cadastrar.jsp">Cadastrar</a></p>
+           
+
             
             
             
         </table>
+        </center>
     </body>
 
 </html>

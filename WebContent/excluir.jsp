@@ -6,11 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Excluir Compromisso</title>
 </head>
-<body>
+
+<body bgcolor="#3366CC">
 
 <h3 align="center">Exclusão de Compromisso</h3>
 	<form action="calendarioServlet" method="post">
-		<table align="center" border="1">
+		<table align="center" border="1" bgcolor="#C9C9C9"cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center">Data</td>
 				<td align="center">Descrição</td>
@@ -23,7 +24,7 @@
 		</table>
 	</form>
 
-	<p align="center"><a href="index.jsp">Início</a></p>
+	<p align="center"><a href="index.jsp">Voltar ao Início</a></p>
 
  <% request.getSession().setAttribute("acao", "excluir");  %>	
 
