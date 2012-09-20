@@ -11,6 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Lista de Compromissos</title>
+<link href="style.css" rel="stylesheet" type="text/css" charset="utf-8" />
 </head>
 <body bgcolor="#3366CC">
        
@@ -28,13 +29,13 @@
   			</tr>
             </table>
             <br/>
-        <table width="950" border="1"  cellspacing="0" cellpadding="0"  >
+        <table width="950" border="1"  cellspacing="0" cellpadding="0" onmouseup="bgcolor:#C9C9C9" >
             <tr>
-                <td width="100" bgcolor="silver">Data</td>
-                <td width="300" bgcolor="silver">Descrição</td>
-                <td width="300" bgcolor="silver">Dia da Semana</td>
-                <td width="100" bgcolor="silver">Dias faltantes</td>
-                <td width="150" bgcolor="silver">Opções</td>
+                <td width="100"  align="center" bgcolor="silver">Data</td>
+                <td width="300"  align="center" bgcolor="silver">Descrição</td>
+                <td width="300"  align="center" bgcolor="silver">Dia da Semana</td>
+                <td width="200"  align="center" bgcolor="silver">Dias faltantes</td>
+                <td width="150"  align="center" bgcolor="silver">Opções</td>
                 
             </tr>
             <%
@@ -46,11 +47,11 @@
        		   String dataFormatada = sdf.format(compromisso.getData());
        		   
                %>
-               <tr>
-                <td><%=dataFormatada%></td>
-                <td><%=compromisso.getDescricao()%></td>
-                <td><%=compromisso.getDiaSemana()%></td>
-                <td><%=compromisso.getQuantidadeDias()%></td>
+               <tr style="cursor:default" onMouseOver="javascript:this.style.backgroundColor='#C0B085'" onMouseOut="javascript:this.style.backgroundColor=''">
+                <td align="center"><%=dataFormatada%></td>
+                <td align="center"><%=compromisso.getDescricao()%></td>
+                <td align="center"><%=compromisso.getDiaSemana()%></td>
+                <td align="center"><%=compromisso.getQuantidadeDias()%></td>
                  <td bgcolor="#C9C9C9">
 	                <a href="alterar.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="alterar" id="alt">Alterar/</a>
 	                <a href="excluir.jsp?data=<%=dataFormatada%>&descricao=<%=compromisso.getDescricao()%>" name="excluir" id="exc">Excluir</a>
@@ -59,10 +60,7 @@
             <%
             }
            %>
-            
-           
-
-            
+                   
             
             
         </table>

@@ -5,11 +5,24 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Alterar Compromisso</title>
+<link href="style.css" rel="stylesheet" type="text/css" charset="utf-8" />
 </head>
+ <script language="javascript" type="text/javascript">
+function validar() {
+	var nome = frmCadastrar.descricao.value;
+	
+	if (nome == "") {
+		alert('Preencha o campo para prosseguir com o cadastro!');
+		frmCadastrar.descricao.focus();
+		return false;
+		}
+
+}
+</script>
 <body bgcolor="#3366CC">
 
 <h3 align="center">Alteração de Compromisso</h3>
-	<form action="calendarioServlet" method="post">
+	<form action="calendarioServlet" method="post" name="frmCadastrar">
 		<table align="center" border="1" bgcolor="#C9C9C9" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center">Data</td>
@@ -18,12 +31,17 @@
 			<tr>
 				<td><input type="text" readonly="readonly" name="data" value="<%=request.getParameter("data") %>" /></td>
 				<td><input type="text" name="descricao" value="<%=request.getParameter("descricao")%>" /></td>
-				<td><input type="submit" value="Alterar" name="btnAction" /></td>
+				<td><input type="submit" value="Alterar" name="btnAction" onclick="return validar()" /></td>
 			</tr>
 		</table>
 	</form>
 
-	<p align="center"><a href="index.jsp">Voltar ao Início</a></p>
+	<br/>
+	<table align="center" border="1" bgcolor="#C9C9C9" cellspacing="0" cellpadding="0">
+	<tr>
+	<td align="center"><a href="index.jsp">Voltar ao Início</a></td>
+	</tr>
+	</table>
 
  <% request.getSession().setAttribute("acao", "alterar");  %>	
 
